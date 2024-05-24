@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <link rel="stylesheet" href="clock.css">
+</head>
+
+<body>
+    <div id="allpage">
+        <div id="clock"></div>
+        <div id="roundclock">
+            <div class="hour">
+                <div class="hr" id="hr"></div>
+            </div>
+            <div class="min">
+                <div class="mn" id="mn"></div>
+            </div>
+            <div class="sec">
+                <div class="sc" id="sc"></div>
+            </div>
+        </div>
+        <script>
+            function elClock() {
+                const clock = document.getElementById('clock');
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const min = String(now.getMinutes()).padStart(2, '0');
+                const sec = String(now.getSeconds()).padStart(2, '0');
+                const setTime = hours + ':' + min + ':' + sec;
+                clock.innerHTML = '';
+                for (let a of setTime) {
+                    const img = document.createElement('img');
+                    if (a === ':')
+                        img.src = 'img/points.gif';
+                    else
+                        img.src = `img/${a}.gif`;
+                    clock.appendChild(img);
+                }
+            
+           
+              }
+
+function roundClock(){
+                const deg = 6;
+                    const hr = document.querySelector('#hr');
+                    const mn = document.querySelector('#mn');
+                    const sc = document.querySelector('#sc');
+
+                    setInterval(() => {
+                        let day = new Date();
+                        let hh = day.getHours() * 30;
+                        let mm = day.getMinutes() * deg;
+                        let ss = day.getSeconds() * deg;
+
+                        hr.style.transform = `rotateZ(${(hh) + (mm / 12)}deg)`;
+                        mn.style.transform = `rotateZ(${(mm)}deg)`;
+                        sc.style.transform = `rotateZ(${(ss)}deg)`;
+
+
+                    });
+                }
+            
+            setInterval(elClock, 1000);
+            elClock();
+            roundClock();
+           
+           
+        </script>
+</body>
+
+</html>
